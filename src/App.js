@@ -4,15 +4,19 @@ import useInterval from './useInterval'
 
 function App() {
 
-  const [xPos, setXPos] = useState(150)
-  const [yPos, setYPos] = useState(150)
-  const [dY, setDY] = useState(5)
+  const [xPos, setXPos] = useState(250)
+  const [yPos, setYPos] = useState(250)
+  const [dY, setDY] = useState(4)
   const [dX, setDX] = useState(5)
+  const [screenX, setScreenX] = useState(200)
+  const [screenY, setScreenY] = useState(300)
   const [countInterval, setCountInterval] = useState(0)
   const [count1, setCount1] = useState(0)
 
   const updateCount1 = ()=>{
     setCount1(count1 + 1)
+    // setScreenX(screenX+1)
+    // setScreenY(screenY+1)
   }
   useInterval(updateCount1, 1000)
   
@@ -34,20 +38,20 @@ function App() {
    },[countInterval])
 
    useEffect(()=>{
-     if(yPos > 280) {
-       setYPos(250)
-       setDY(-5)
+     if(yPos > screenY-20) {
+       setYPos(screenY-25)
+       setDY(-4)
      }
-     if(yPos < 5) {
-      setYPos(10)
-      setDY(5)
+     if(yPos < 0) {
+      setYPos(5)
+      setDY(4)
     }
-    if(xPos > 280) {
-      setXPos(250)
-      setDY(-5)
+    if(xPos > screenX - 30) {
+      setXPos(screenX - 35)
+      setDX(-5)
     }
-    if(xPos < 5) {
-     setXPos(10)
+    if(xPos < 0) {
+     setXPos(5)
      setDX(5)
    }
    },[xPos, yPos])
@@ -72,7 +76,8 @@ function App() {
 
 
      <h2>animation: count :{countInterval}</h2>
-     <div style={{width:'300px', height:'300px', border:'1px solid black', position:'relative'}}>
+     <h2>dX: {dX}, dy:{dY}</h2>
+     <div style={{width:`${screenX}px`, height:`${screenY}px`, border:'1px solid black', position:'relative', margin:'auto'}}>
        <div style={{position:'absolute', top:yPos, left:xPos}}>dvd</div>
      </div>
 
