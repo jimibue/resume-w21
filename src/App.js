@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
       <p>work as paper boy 10 years</p>
 
       <h2>contact</h2>
-      
+
     </div>
   );
 }
