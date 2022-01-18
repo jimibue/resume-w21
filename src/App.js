@@ -1,6 +1,7 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import useInterval from './useInterval'
+import axios from 'axios';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   const [screenY, setScreenY] = useState(300)
   const [countInterval, setCountInterval] = useState(0)
   const [count1, setCount1] = useState(0)
+  const [memes, setMemes] = useState([])
 
   const updateCount1 = ()=>{
     setCount1(count1 + 1)
@@ -22,6 +24,7 @@ function App() {
   
 
    useEffect(()=>{
+    getMemes()
     const tick = ()=>{
       setCountInterval((prevState)=> prevState + 1)
       // setYPos((prevState)=> prevState + 10)
@@ -31,6 +34,16 @@ function App() {
        clearInterval(id)
     }
    },[])
+
+   const getMemes = async ()=>{
+     try{
+       let res = await axios.get('https://heroku-w21.herokuapp.com/api/memes')
+       setMemes(res.data)
+     } catch(err){
+       alert('err')
+       console.log(err)
+     }
+   }
 
    useEffect(()=>{
     setYPos(yPos + dY)
@@ -62,7 +75,7 @@ function App() {
   return (
     <div className="App"> 
       <h1>About James Y.</h1>
-
+      {JSON.stringify(memes)}
       <h2>work history</h2>
 
       <h3>Paper boy</h3>
